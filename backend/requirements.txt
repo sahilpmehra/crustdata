@@ -4,7 +4,7 @@ python-dotenv==1.0.0
 openai==1.59.2
 pydantic==2.5.2
 python-decouple==3.8
-langchain==0.1.12
+langchain-community==0.0.38
 langchain-openai==0.2.14
 beautifulsoup4==4.12.3
 requests==2.31.0
