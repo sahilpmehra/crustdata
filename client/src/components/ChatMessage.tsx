@@ -92,7 +92,7 @@ const ChatMessage: React.FC<ChatMessageProps> = ({ message }) => {
         }
 
         return (
-            <div key={index} className={`prose prose-invert max-w-none ${isUserMessage ? 'text-white' : 'text-gray-800'}`}>
+            <div key={index} className={`prose max-w-none ${isUserMessage ? 'text-white' : 'text-gray-800'}`}>
                 <ReactMarkdown>
                     {part.content}
                 </ReactMarkdown>
