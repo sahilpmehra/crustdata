@@ -7,4 +7,4 @@ MAX_TOKENS = int(os.environ.get('MAX_TOKENS', '15000'))
 PDF_PATHS = os.environ.get('PDF_PATHS', './data/pdfs/Crustdata Dataset API Detailed Examples.pdf,./data/pdfs/Crustdata Discovery And Enrichment API.pdf').split(',')
 
 # Add production-specific configurations
-VECTOR_STORE_PATH = os.environ.get('VECTOR_STORE_PATH', '/opt/render/project/src/backend/data/chroma') 
+VECTOR_STORE_PATH = os.environ.get('VECTOR_STORE_PATH', './data/chroma') 
