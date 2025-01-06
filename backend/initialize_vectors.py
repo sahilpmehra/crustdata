@@ -25,16 +25,16 @@ def chunk_text(text, pdf_path, chunk_size=250, overlap=25):
     chunk_number = 1
     while start < len(words):
         end = start + chunk_size
-        chunk = words[start:end]
+        chunk = " ".join(words[start:end])  # Join words into a string
         # Create DocSection object for each chunk
         doc_section = DocSection(
-            content=" ".join(chunk),
+            content=chunk,
             url=pdf_path,
-            title=pdf_path.split('/')[-1],  # Use filename as title
+            title=pdf_path.split('/')[-1],
             section=f"Chunk {chunk_number}"
         )
-        metadatas.append(doc_section)
-        chunks.append(chunk)
+        metadatas.append(doc_section.__dict__)  # Convert dataclass to dict
+        chunks.append(chunk)  # Now appending string instead of list of words
         start += chunk_size - overlap
         chunk_number += 1
     return chunks, metadatas
