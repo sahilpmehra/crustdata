@@ -20,6 +20,7 @@ def clean_text(text):
 def chunk_text(text, pdf_path, chunk_size=250, overlap=25):
     words = text.split()
     chunks = []
+    metadatas = []
     start = 0
     chunk_number = 1
     while start < len(words):
@@ -32,10 +33,11 @@ def chunk_text(text, pdf_path, chunk_size=250, overlap=25):
             title=pdf_path.split('/')[-1],  # Use filename as title
             section=f"Chunk {chunk_number}"
         )
-        chunks.append(doc_section)
+        metadatas.append(doc_section)
+        chunks.append(chunk)
         start += chunk_size - overlap
         chunk_number += 1
-    return chunks
+    return chunks, metadatas
 
 def extract_text_from_pdf(pdf_path):
     text = ""
@@ -48,16 +50,18 @@ async def initialize_vector_store():
     vector_store = VectorStoreService(OPENAI_API_KEY)
     
     all_sections = []
+    all_metadatas = []
     for pdf_path in PDF_PATHS:
         # Extract text from PDF
         raw_text = extract_text_from_pdf(pdf_path)
         # Clean the text
         cleaned_text = clean_text(raw_text)
         # Create chunks as DocSection objects
-        sections = chunk_text(cleaned_text, pdf_path)
-        all_sections.extend(sections)
+        chunks, metadatas = chunk_text(cleaned_text, pdf_path)
+        all_sections.extend(chunks)
+        all_metadatas.extend(metadatas)
     
-    vector_store.create_embeddings(all_sections)
+    vector_store.create_embeddings(all_sections, all_metadatas)
     return vector_store
 
 if __name__ == "__main__":

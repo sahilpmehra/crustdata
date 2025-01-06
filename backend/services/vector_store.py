@@ -2,12 +2,11 @@ from langchain_openai import OpenAIEmbeddings
 from langchain_community.vectorstores import Chroma
 from typing import List
 import os
-from config_prod import VECTOR_STORE_PATH
 
 class VectorStoreService:
     def __init__(self, openai_api_key: str):
         self.embeddings = OpenAIEmbeddings(openai_api_key=openai_api_key)
-        self.persist_directory = VECTOR_STORE_PATH
+        self.persist_directory = "../data/chroma"
         
         # Load existing vector store if it exists
         if os.path.exists(self.persist_directory):
