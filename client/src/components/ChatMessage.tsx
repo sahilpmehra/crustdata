@@ -1,6 +1,7 @@
 import React from 'react';
 import { LightAsync as SyntaxHighlighter } from 'react-syntax-highlighter';
 import { vs2015 } from 'react-syntax-highlighter/dist/cjs/styles/hljs';
+import ReactMarkdown from 'react-markdown';
 
 interface Message {
     id: number;
@@ -92,21 +93,9 @@ const ChatMessage: React.FC<ChatMessageProps> = ({ message }) => {
 
         return (
             <div key={index} className={`prose prose-invert max-w-none ${isUserMessage ? 'text-white' : 'text-gray-800'}`}>
-                {part.content.split('\n').map((line, i) => {
-                    // Check if line starts with a number followed by a dot
-                    if (/^\d+\.\s/.test(line)) {
-                        return <p key={i} className="mb-2">{line}</p>;
-                    }
-                    // Check if line starts with "Explanation:"
-                    if (line.startsWith('Explanation:')) {
-                        return <h2 key={i} className="text-xl font-semibold mt-6 mb-4">{line}</h2>;
-                    }
-                    // Handle bullet points
-                    if (line.startsWith('•') || line.startsWith('- ')) {
-                        return <p key={i} className="mb-2 ml-4">{line}</p>;
-                    }
-                    return <p key={i} className="mb-2">{line}</p>;
-                })}
+                <ReactMarkdown>
+                    {part.content}
+                </ReactMarkdown>
             </div>
         );
     };

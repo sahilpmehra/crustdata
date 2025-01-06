@@ -12,6 +12,7 @@ app = FastAPI()
 FRONTEND_URL = os.environ.get('FRONTEND_URL', 'http://localhost:5173')
 ALLOWED_ORIGINS = [
     FRONTEND_URL,
+    'http://localhost:5173',
     'https://your-production-frontend.vercel.app'  # Add your Vercel domain
 ]
 
