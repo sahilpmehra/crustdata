@@ -1,4 +1,4 @@
-# CrustData
+# CrustData Challenge
 
 A modern chat application for customer support on the Crustdata API built with FastAPI backend and React TypeScript frontend. The application provides a real-time chat interface powered by OpenAI's API.
 
